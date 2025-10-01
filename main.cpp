@@ -5,8 +5,7 @@
 #include <thread>
 #include <chrono>
 #include <filesystem>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
+#include <SFML/Audio.hpp>
 #include <algorithm>
 #include <csignal>
 
@@ -55,22 +54,20 @@ void playAsciiFrames(const string& frameDir, int fps) {
 }
 
 void playAudio(const string& audioFile) {
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        cerr << "SDL_mixer Error: " << Mix_GetError() << endl;
+    sf::Music music;
+    if (!music.openFromFile(audioFile)) {
+        cerr << "Failed to load audio: " << audioFile << endl;
         return;
     }
-    Mix_Music* music = Mix_LoadMUS(audioFile.c_str());
-    if (!music) {
-        cerr << "Failed to load audio: " << Mix_GetError() << endl;
-        return;
-    }
-    Mix_PlayMusic(music, -1);
-    while (running && Mix_PlayingMusic()) {
+    
+    music.setLooping(true);
+    music.play();
+    
+    while (running && music.getStatus() == sf::SoundStream::Status::Playing) {
         this_thread::sleep_for(chrono::milliseconds(100));
     }
-    Mix_HaltMusic();
-    Mix_FreeMusic(music);
-    Mix_CloseAudio();
+    
+    music.stop();
 }
 
 int main() {
