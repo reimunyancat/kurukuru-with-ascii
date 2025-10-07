@@ -45,7 +45,7 @@ def save_frames_to_ascii(video_path, output_dir, width):
     print(f"Converted {frame_count} frames to ASCII art with color and saved to '{output_dir}'.")
 
 if __name__ == "__main__":
-    base_path = "/home/reimunyancat/Archive/kururin/"
+    base_path = "./"
     video_path = base_path + "kuru_kuru.mp4"
     output_dir = base_path + "frames"
     save_frames_to_ascii(video_path, output_dir, width=100)

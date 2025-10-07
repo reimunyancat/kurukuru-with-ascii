@@ -71,9 +71,9 @@ void playAudio(const string& audioFile) {
 }
 
 int main() {
-    const string basePath = "/home/reimunyancat/Archive/kururin/";
-    const string frameDir = basePath + "frames";
-    const string audioFile = basePath + "kuru_kuru.mp3";
+    
+    const string frameDir = "frames";
+    const string audioFile = "kuru_kuru.mp3";
     const int fps = 30;
 
     signal(SIGINT, signalHandler);

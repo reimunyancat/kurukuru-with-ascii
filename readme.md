@@ -23,17 +23,23 @@ python3 frame.py
 - The `frames/` folder will be filled with files like `frame_0000.txt`, `frame_0001.txt`, ...
 
 ### 2. Play (C++)
-#### Install SDL2 and SDL2_mixer (example for Arch Linux and Ubuntu)
+#### Install SFML (example for Arch Linux and Ubuntu)
 - Arch Linux:
   ```bash
-  sudo pacman -S sdl2 sdl2_mixer
+  sudo pacman -S sfml
   ```
 - Ubuntu:
   ```bash
-  sudo apt install libsdl2-dev libsdl2-mixer-dev
+  sudo apt install libsfml-dev
   ```
 #### Build and Run
 ```bash
-g++ -std=c++17 -o main main.cpp -lSDL2 -lSDL2_mixer -pthread
+# Using build script
+bash build.sh
+
+# Or manually
+g++ -std=c++17 -O2 main.cpp -o main -lsfml-audio -lsfml-system
+
+# Run
 ./main
 ```
