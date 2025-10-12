@@ -1,5 +1,6 @@
 import cv2
 import os
+import shutil
 
 ASCII_CHARS = "█▓▒░@%#*+=-:. "
 
@@ -26,9 +27,12 @@ def frame_to_ascii_color(frame, new_width=100):
     return ascii_frame
 
 def save_frames_to_ascii(video_path, output_dir, width):
+    if os.path.exists(output_dir):
+        shutil.rmtree(output_dir)
+    
+    os.makedirs(output_dir)
+    
     cap = cv2.VideoCapture(video_path)
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
 
     frame_count = 0
     while cap.isOpened():
